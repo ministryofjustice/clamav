@@ -1,5 +1,7 @@
 # clamav
 
+[![CircleCI](https://circleci.com/gh/ministryofjustice/clamav/tree/master.svg?style=svg)](https://circleci.com/gh/ministryofjustice/clamav/tree/master)
+
 ClamAV daemon as a Docker image. It *builds* with a current virus database and
 *runs* `freshclam` in the background constantly updating the virus signature database. `clamd` itself
 is listening on exposed port `3310`.
