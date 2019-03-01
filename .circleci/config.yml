@@ -1,10 +1,9 @@
 version: 2
-jobs:
-  build:
+
+references:
+  build_and_push: &build_and_push
     docker:
       - image: circleci/ruby:2.5.3-node-browsers
-        environment:
-          - GITHUB_TEAM_NAME_SLUG=laa-apply-for-legal-aid
     steps:
       - checkout
       - setup_remote_docker:
@@ -33,16 +32,26 @@ jobs:
               docker push "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_TAG}"
             fi
 
+jobs:
+  build:
+    <<: *build_and_push
+
+  push:
+    <<: *build_and_push
+
 workflows:
   version: 2
-  build:
-    jobs:
-      - build
-  tagged-build:
+  build-n-push:
     jobs:
       - build:
           filters:
             tags:
-              only: /\d{1}/
+              only: /.*/
+      - push:
+          requires:
+            - build
+          filters:
+            tags:
+              only: /.*/
             branches:
               ignore: /.*/
