@@ -38,6 +38,8 @@ VOLUME ["/var/lib/clamav"]
 # port provision
 EXPOSE 3310
 
+USER clamav
+
 # av daemon bootstrapping
 ADD bootstrap.sh /
 CMD ["/bootstrap.sh"]
