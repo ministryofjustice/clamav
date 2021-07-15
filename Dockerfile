@@ -11,16 +11,16 @@ RUN echo "deb http://http.debian.net/debian/ $DEBIAN_VERSION main contrib non-fr
     DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y -qq \
         clamav-daemon \
         clamav-freshclam \
-        libclamunrar7 \
+        libclamunrar9 \
         wget && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 # initial update of av databases
-RUN wget -O /var/lib/clamav/main.cvd http://database.clamav.net/main.cvd && \
-    wget -O /var/lib/clamav/daily.cvd http://database.clamav.net/daily.cvd && \
-    wget -O /var/lib/clamav/bytecode.cvd http://database.clamav.net/bytecode.cvd && \
-    chown clamav:clamav /var/lib/clamav/*.cvd
+#RUN wget -O /var/lib/clamav/main.cvd http://database.clamav.net/main.cvd && \
+#    wget -O /var/lib/clamav/daily.cvd http://database.clamav.net/daily.cvd && \
+#    wget -O /var/lib/clamav/bytecode.cvd http://database.clamav.net/bytecode.cvd && \
+#    chown clamav:clamav /var/lib/clamav/*.cvd
 
 # permission juggling
 RUN mkdir /var/run/clamav && \
