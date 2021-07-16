@@ -1,7 +1,7 @@
 #!/bin/bash
 # bootstrap clam av service and clam av database updater shell script
 # copied from https://github.com/mko-x/docker-clamav
-
+echo "Hello World! this is the bootstap.sh file"
 set -m
 
 # start clam service itself and the updater in background as daemon
